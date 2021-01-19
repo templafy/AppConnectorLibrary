@@ -1,0 +1,18 @@
+body {
+    margin: 20px;
+  }
+
+.app {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+  }
+
+.label {
+    padding-bottom: 10px;
+}
+
+.input {
+    width: 400px;
+}
+
