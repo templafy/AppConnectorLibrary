@@ -17,7 +17,7 @@ const App: React.FC = () => {
     const [documentUrl, setDocumentUrl] = useState<string>("");
     const [popupOpened, setOpenedPopup] = useState<boolean>(false);
     const [popupUrl, setPopupUrl] = useState<string>(
-        `https://templafy.templafy-local.com/library/documents?externalSystemType=genericAppConnector&origin=${window.location.origin}`);
+        `https://tenant.templafy.com/library/documents?externalSystemType=genericAppConnector&origin=${window.location.origin}`);
     const [contentMessage, setContentMessage] = useState<string>("{\"testKey\": \"testValue\"}");
 
     let openedPopup: Window | null;
@@ -52,11 +52,11 @@ const App: React.FC = () => {
     return (
         <div className="app">
             <h1>Setup</h1>
-            <i>Create "App Connector" setting and set as "Domain Name" the same domain executing this code.
-                This must much the "origin" query string parameter of the request to Templafy as well.</i>
+            <i>Create a "Custom App Connector" setting and set as "Domain Name" the same domain executing this code.
+                This must match the "origin" query string parameter of the request to Templafy as well.</i>
 
-            <i>Replace "templafy.templafy-local.com" from the URL below with the one of your tenant.
-                E.g. "mycompany.templafy.com".
+            <i>Replace "tenant.templafy.com" from the URL below with the one of your tenant.
+                Example: "mycompany.templafy.com".
             </i>
 
             <h1>Test</h1>
