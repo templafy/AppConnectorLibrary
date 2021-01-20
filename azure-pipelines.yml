@@ -1,0 +1,38 @@
+trigger:
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: ubuntu-18.04
+
+variables:
+  - group: DeliveryConnectorLibrary
+
+steps:
+  - task: UseGitVersion@5
+    inputs:
+      versionSpec: '5.3.7'
+      useConfigFile: true
+      configFilePath: 'git-version.yml'
+
+  - task: npmAuthenticate@0
+    inputs:
+      workingFile: ./.npmrc
+      customEndpoint: 'NPM JS Registry'
+    displayName: 'Npm Authenticate'
+
+  - script: yarn install
+    workingDirectory: ./examples/app-connector
+    displayName: 'Yarn install'
+
+  - script: yarn build
+    workingDirectory: ./examples/app-connector
+    displayName: 'Yarn build'
+
+  - script: yarn publish --new-version $(GitVersion.SemVer) --no-git-tag-version --access public
+    workingDirectory: ./examples/app-connector/build
+    displayName: 'Yarn publish'
+
+  - script: 'git push https://$(GitHubToken)@github.com/templafy/AppConnectorLibrary.git'
+    displayName: Push to GitHub

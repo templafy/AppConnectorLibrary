@@ -1,20 +1,16 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Templafy App Connector Library
+This library allows external vendors to start the Templafy document creation process from their own apps and have the resulting document saved back to their app.
+App connector is an external system which starts the Templafy's create document flow in its own context.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+## Flow
+1. The user presses a button or a link in the external app.
+2. The app connector opens a pop-up that loads Templafy. It optionally sends along data which can be used in the document creation process.
+3. Templafy validates the orgin of the request and allows the request.
+4. If needed, the user is authenticated.
+5. The user creates a document in Templafy and the Templafy's popup closes itself.
+6. The app connector receives a Shared-Access Signature (SAS) link from where to download the created document.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+An example app connector can be found under [Examples](./examples)
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Caveats
+All communication must be over HTTPS.
