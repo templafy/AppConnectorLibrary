@@ -52,7 +52,7 @@ const App: React.FC = () => {
     return (
         <div className="app">
             <h1>Setup</h1>
-            <i>Create a "Custom App Connector" setting under Integrations in the Templafy admin interface and set as "Domain Name" domain that will be executing this code.
+            <i>Create a "Custom App Connector" setting under Integrations in the Templafy admin interface and set as "Domain Name" the domain that will be executing this code.
                 This must match the "origin" query string parameter of the request to Templafy as well.</i>
 
             <i>Replace "tenant.templafy.com" from the URL below with the one of your tenant.

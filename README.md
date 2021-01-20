@@ -8,7 +8,7 @@ App connector is an external system which starts the Templafy's create document 
 3. Templafy validates the orgin of the request and allows the request.
 4. If needed, the user is authenticated.
 5. The user creates a document in Templafy and the Templafy's popup closes itself.
-6. The app connector receives a Shared-Access Signgature (SAS) link from where to download the created document.
+6. The app connector receives a Shared-Access Signature (SAS) link from where to download the created document.
 
 An example app connector can be found under [Examples](./examples)
 
