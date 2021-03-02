@@ -4,10 +4,11 @@ trigger:
     - master
 
 pool:
-  vmImage: ubuntu-20.04
+  vmImage: $(agentPoolVmImage)
 
 variables:
 - group: ConnectorLibraries
+- group: PipelineSoftwareVersions
 
 steps:
 - task: UseGitVersion@5
