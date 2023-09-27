@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Templafy - App Connector</title>
+  </head>
+  <body>
+    <div className="app">
+      <h1>Setup</h1>
+      <hr />
+      <i>
+        Create a "Custom App Connector" setting under Integrations in the
+        Templafy admin interface and set as "Domain Name" the domain that will
+        be executing this code. This must match the "origin" query string
+        parameter of the request to Templafy as well.
+      </i>
+
+      <i>
+        Replace "tenant.templafy.com" from the URL below with the one of your
+        tenant. Example: "mycompany.templafy.com".
+      </i>
+
+      <h1>Test</h1>
+      <hr />
+      <label className="label">
+        Popup URL which will open Templafy:
+        <br />
+        <input id="popup-url" className="input" type="text" size="100" />
+      </label>
+      <br />
+      <br />
+      <label className="label">
+        Content message send to Templafy:
+        <br />
+        <textarea id="content" rows="10" cols="100">
+{
+    "opportunityId": "1234",
+    "opportunityName": "My opportunity",
+    "opportunityValue": 9001,
+    "IsWon": true
+}
+      </textarea>
+      </label>
+      <br />
+      <br />
+      <button type="button" onclick="openTemplafyPopup()">Open Popup</button>
+
+      <hr />
+      <h1>Result</h1>
+      <label className="label">
+        Document URL:
+        <br />
+        <input
+          id="document-url"
+          className="input"
+          type="text"
+          size="100"
+          disabled="true"
+        />
+      </label>
+    </div>
+
+    <script>
+      let popupUrl;
+      let openedPopup;
+
+      function messageEventHandler(message) {
+        const data = message.data;
+
+        if (data?.type === "ready") {
+          // 'ready' message received from Templafy, this indicates it's ready to receive "content".
+          console.log(data);
+          const contentMessage = document.getElementById("content").value;
+
+          // Send content to Templafy-popup using `postMessage`.
+          // More on postMessage here: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+          openedPopup?.postMessage(
+            { type: "content", content: JSON.parse(contentMessage) },
+            popupUrl.origin
+          );
+        } else if (data?.type === "document") {
+          // 'document' message received from Templafy, this indicates it completed generating a document, the message contains a URL to the document.
+          console.log(data);
+          const documentUrl = data.documentUrl;
+          document.getElementById("popup-url").textContent = documentUrl;
+
+          // Templafy does not close the popup, so we close it here.
+          openedPopup.close();
+          window.removeEventListener("message", messageEventHandler);
+
+          // For this sample we redirect to the document url, this will initiate a download by the browser.
+          window.location.href = documentUrl;
+        }
+      }
+
+      function openTemplafyPopup() {
+        const features =
+          "menubar=no,location=no,resizable=no,scrollbars=no,status=no,titlebar=no,toolbar=no,width=1500,height=1000";
+
+        popupUrl = new URL(document.getElementById("popup-url").value);
+
+        // Open the Templafy popup.
+        openedPopup = window.open(popupUrl, "_blank", features);
+
+        if (!openedPopup) {
+          throw new Error(
+            "Popup was not opened, make sure this function is run from a click action."
+          );
+        }
+
+        // Register event listener for handling messages sent by Templafy.
+        window.addEventListener("message", messageEventHandler);
+      }
+    </script>
+  </body>
+</html>

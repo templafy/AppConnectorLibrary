@@ -22,13 +22,5 @@ steps:
     useConfigFile: true
     configFilePath: 'git-version.yml'
 
-- script: yarn install
-  workingDirectory: ./examples/app-connector
-  displayName: 'Yarn install'
-
-- script: yarn build
-  workingDirectory: ./examples/app-connector
-  displayName: 'Yarn build'
-
 - script: 'git push https://$(GitHubToken)@github.com/templafy/AppConnectorLibrary.git'
   displayName: Push to GitHub
