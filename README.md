@@ -24,7 +24,7 @@ This integration works by interacting with Templafy using messages, highover to 
 6. 3rd-party closes Templafy popup.
 
 ### Sequence diagram
-::: mermaid
+```mermaid
 sequenceDiagram
   User->>3rd party system: Click `create document` button
   3rd party system->>Templafy: Open Templafy popup
@@ -33,7 +33,7 @@ sequenceDiagram
   User->>Templafy: Complete document creation in Templafy
   Templafy->>3rd party system: Send `document` message containing the document URL.
   3rd party system->>3rd party system: Close Templafy popup & process document
-:::
+```
 
 ## Using the example
 1. Setup a custom app connector on your Templafy tenant, more on that [here](https://support.templafy.com/hc/en-us/articles/360018358678-How-to-enable-a-Custom-App-Connector-).
