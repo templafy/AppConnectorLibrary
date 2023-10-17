@@ -13,6 +13,11 @@ function registerAppConnectorMessageHandler(
   window.addEventListener(
     "message",
     (message) => {
+      if (message.source.self !== popup) {
+        // Message did not come from opened popup, do not process.
+        return;
+      }
+
       const messageData = message.data;
 
       if (messageData?.type === "ready") {
