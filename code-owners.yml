@@ -3,8 +3,7 @@ branchPolicy:
   - buildName: AppConnectorLibrary
     manualTrigger: false
     displayName: AppConectorLibrary
-    pathFilters:
-    - '!/code-owners.yml'
+    pathFilters: []
     required: true
   statusChecks: []
   autoReviewers:
