@@ -1,0 +1,14 @@
+branchPolicy:
+  buildValidations:
+  - buildName: AppConnectorLibrary
+    manualTrigger: false
+    displayName: AppConectorLibrary
+    pathFilters: []
+    required: true
+  statusChecks: []
+  autoReviewers:
+  - reviewer: Data Integration
+    isGroup: true
+    pathFilters: []
+    required: true
+    numReviewers: 1
