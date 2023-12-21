@@ -1,3 +1,5 @@
+owners:
+  - Data Integration
 branchPolicy:
   buildValidations:
   - buildName: AppConnectorLibrary
