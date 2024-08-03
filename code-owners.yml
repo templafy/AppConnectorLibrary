@@ -1,5 +1,5 @@
 owners:
-  - Data Integration
+  - Create
 branchPolicy:
   buildValidations:
   - buildName: AppConnectorLibrary
@@ -9,7 +9,7 @@ branchPolicy:
     required: true
   statusChecks: []
   autoReviewers:
-  - reviewer: Data Integration
+  - reviewer: Create
     isGroup: true
     pathFilters: []
     required: true
