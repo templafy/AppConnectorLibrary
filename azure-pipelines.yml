@@ -10,7 +10,15 @@ variables:
 - group: ConnectorLibraries
 - group: PipelineSoftwareVersions
 
-- template: pipeline-templates/gitversion-task.yml@templates
+resources:
+  repositories:
+  - repository: templates
+    name: Pipelines
+    type: git
+    ref: refs/heads/master
+
+steps:     
+  - template: pipeline-templates/gitversion-task.yml@templates
     parameters:
       gitVersionVersion: $(gitVersionVersion)
 
