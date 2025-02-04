@@ -17,10 +17,10 @@ resources:
     type: git
     ref: refs/heads/master
 
-steps:     
-  - template: pipeline-templates/gitversion-task.yml@templates
-    parameters:
-      gitVersionVersion: $(gitVersionVersion)
+steps:
+- template: pipeline-templates/gitversion-task.yml@templates
+  parameters:
+    gitVersionVersion: $(gitVersionVersion)
 
 - script: 'git push https://$(GitHubToken)@github.com/templafy/AppConnectorLibrary.git'
   displayName: Push to GitHub
