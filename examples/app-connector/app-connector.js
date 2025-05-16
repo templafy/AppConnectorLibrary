@@ -26,6 +26,13 @@ const templafy = (function () {
 
           // Send content to Templafy-popup using `postMessage`.
           // More on postMessage here: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+          // In case you're connecting to Templafy from Salesforce with Lightning Web Security enabled,
+          // it's necessary to pass the string instead of the object to the postMessage function.
+          // Instead of:
+          // { type: "content", content: JSON.parse(data) }
+          // Use:
+          // JSON.stringify({ type: "content", content: JSON.parse(data) })
+          // More on this here: https://developer.salesforce.com/docs/platform/lightning-components-security/guide/lws-proxies.html
           popup.postMessage(
             { type: "content", content: JSON.parse(data) },
             popupUrl.origin
