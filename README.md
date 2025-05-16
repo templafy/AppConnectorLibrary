@@ -13,9 +13,9 @@ With the App Connector you can:
 - 3rd-party application is able to open popups and use [PostMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
 
 ## How it works
-This integration opperates entirely in the browser using Javascripts [PostMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage). This means that there's no network interaction between Templafy and the integrating system, in theory this means that this integration can also work with systems not exposed on the internet.
+This integration opperates entirely in the browser using Javascript's [PostMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage). This means that there's no network interaction between Templafy and the integrating system, in theory this means that this integration can also work with systems not exposed on the internet.
 
-This integration works by interacting with Templafy using messages, highover to integration works like this:
+This integration works by interacting with Templafy using messages in the following order:
 1. 3rd-party opens Templafy popup.
 2. Templafy sends `ready` message to indicate it's ready to receive `content`.
 3. 3rd-party replies to `ready` by sending a `content` message in JSON format.
